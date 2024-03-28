@@ -1,0 +1,85 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+
+<div class="page">
+
+        <!-- Page Header-->
+        <section class="page-title page-title-bg fixed-bg overlay dark-5 padding-top-160 padding-bottom-80">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-12">
+                        <h2 class="white-text">Our job offers</h2>
+                        <span class="white-text">Search and filter by job category</span>
+                        
+                    </div>
+                </div>
+            </div>
+        </section>
+
+       <section id="job-offers" class="section-padding gray-bg">
+			<div class="container">
+				<div class="text-center mb-40">
+					<h2 class="section-title">We have the perfect job for you</h2>
+					<p class="section-sub">just like our candidates, we offer quality, serious & reliable job offers.</p>
+				</div>
+				<div class="portfolio-container">
+
+					<ul class="portfolio-filter brand-filter text-center">
+						{% for jobCategory in jobsCategory %}
+							<li class="waves-effect waves-light" data-group="{{ jobCategory.name }}">{{ jobCategory.name }}</li>
+						{% endfor %}
+					</ul>
+					<div class="portfolio portfolio-with-title col-2 gutter mt-30">
+
+
+						{% for job in jobs %}
+							<div class="portfolio-item" data-groups='["all", "{{ job.jobCategory.name }}"]'>
+								<div class="portfolio-wrapper">
+									<div class="card job-card">
+										<div class="card-content">
+											<span class="title">
+												<span class="card-title">{{ job.jobTitle }}</span>
+												<span class="ref grey-text">Ref.
+													{{ job.reference }}</span>
+											</span>
+											<div class="metas mb-20">
+												<div class="meta">
+													<i class="material-icons">&#xE53E;</i>
+													{{ job.salary }}&euro;
+												</div>
+												{# <div class="meta">
+													<i class="material-icons">&#xE916;</i>
+													{{ offer.createdAt ? offer.createdAt|date('Y-m-d') : 'N/A' }}
+												</div> #}
+												<div class="meta">
+													<i class="material-icons">&#xE55F;</i>
+													{{ job.location }}
+												</div>
+											</div>
+											<p class="truncate-text">{{ job.description }}</p>
+										</div>
+										<div class="card-action">
+											<a class="btn btn-md primary border waves-effect waves-dark" href="">Details</a>
+											<a class="btn btn-md primary waves-effect waves-light" href="#!">Apply</a>
+										</div>
+									</div>
+								</div>
+							</div>
+				
+						{% endfor %}
+					</div>
+
+
+                {# Si aucune offre n'est trouvée #}
+                {% if jobs is empty %}
+                    <p>Aucune offre n'a été trouvée.</p>
+                {% endif %}
+            </div>
+        </div>
+    </section>
+
+    </div>
+
+</div>
+{% endblock %}
